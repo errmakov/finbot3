@@ -1,0 +1,9 @@
+version: "3"
+services:
+  finbot2:
+    build: .
+    restart: "no"
+    hostname: "docker_finbot2"
+    container_name: "finbot2"
+    ports:
+      - 4090:4090
