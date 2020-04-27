@@ -1,0 +1,25 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
+let config = {
+  firebase: {
+    credentialsPath: process.env.FIREBASE_CREDENTIAL_PATH, //path in app folder
+    defaultCollection: '',
+    defaultArticle: '',
+    defaultArticleId: '',
+
+  },
+  google: {
+    tokenPath: process.env.GOOGLE_TOKEN_PATH || '.credentials/..',
+    credentialsPath: process.env.GOOGLE_CREDENTIAL_PATH || '.credentials/..',
+    spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID || '',
+    range: process.env.GOOGLE_RANGE || ''
+  },
+
+  debug: process.env.DEBUG || 1,
+  testTimeout: process.env.TEST_TIMEOUT || 3000
+
+}
+
+
+module.exports = {config}
