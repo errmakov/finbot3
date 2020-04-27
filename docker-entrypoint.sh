@@ -1,14 +1,12 @@
 #!/bin/sh
 
 # Work directory
-dir="/apps/finbot2/app"
-#cd ${dir} && npm install pm2 -g
+dir="/apps/finbot3/app"
+
+cd ${dir} && npm install pm2 -g
 
 # Install app dependencies
 cd ${dir} && npm install
 
-cd ${dir} && npm $STAND
-
 # Run application
-#cd ${dir} && pm2 start index.js --name finbot2 --watch --no-daemon
-#test cd ${dir} && npm start
+cd .. && pm2 start app/app.js --name finbot3 --watch --no-daemon -o ~/.pm2/logs/finbot3.out.log -e ~/.pm2/logs/finbot3.err.log

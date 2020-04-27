@@ -1,7 +1,8 @@
-const consoller = require('../vendors/consoller').consoller;
-const dataParser = require('../app/dataParser').dataParser;
-const DataSender = require('../app/dataSender');
-const config = require('../app/config').config;
+const DIR = __dirname;
+const consoller = require(DIR + '/../vendors/consoller').consoller;
+const dataParser = require(DIR + '/dataParser').dataParser;
+const DataSender = require(DIR + '/DataSender');
+const config = require(DIR + '/config').config;
 
 MailListener = require("mail-listener5");
 

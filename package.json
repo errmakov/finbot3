@@ -7,6 +7,7 @@
     "test": "tests"
   },
   "scripts": {
+    "start": "node app/app.js",
     "test": "mocha --recursive ./tests --timeout 5000",
     "test1": "mocha ./tests/testEmailToSheet --timeout 3000",
     "test2": "mocha ./tests/testDataParser --timeout 3000",
@@ -31,6 +32,7 @@
     "nodemailer": "^6.4.6",
     "npm": "^6.14.4",
     "nyc": "^15.0.1",
+    "pm2": "^4.4.0",
     "readline": "^1.3.0",
     "sinon": "^9.0.2",
     "xmlhttprequest": "^1.8.0"

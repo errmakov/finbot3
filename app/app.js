@@ -1,9 +1,12 @@
-const config = require('../app/config').config;
-const consoller = require('../vendors/consoller').consoller;
-const EmailToSheet = require('../app/EmailToSheet');
+const DIR = __dirname
+const config = require(DIR + '/config').config;
+const consoller = require(DIR + '/../vendors/consoller').consoller;
+const EmailToSheet = require(DIR + '/EmailToSheet');
+const fs = require('fs');
 
-const db = require('../app/Db');
-const dbConf = {serviceKey:require('../' + config.firebase.credentialsPath)}
+
+const db = require(DIR + '/Db');
+const dbConf = {serviceKey: require(config.firebase.credentialsPath)}
 let dbh, ets;
 db.initDb(dbConf,(err, res)=>{
   dbh = res;
@@ -37,3 +40,12 @@ ets.on('stored', (res)=>{
   consoller.log('One more mail stored: ', res);
 })
 ets.run();
+
+
+setInterval(()=>{
+  consoller.log('Going hard restart');
+  fs.writeFile('touch.flag', '', (err) => {
+    if (err) throw err;
+    consoller.log('Flag touched');
+  });
+},config.hardResetTimeout)

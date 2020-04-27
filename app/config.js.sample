@@ -17,7 +17,8 @@ let config = {
   },
 
   debug: process.env.DEBUG || 1,
-  testTimeout: process.env.TEST_TIMEOUT || 3000
+  testTimeout: process.env.TEST_TIMEOUT || 3000,
+  hardResetTimeout: process.env.HARD_RESET_TIMEOUT || 30000
 
 }
 
