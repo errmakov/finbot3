@@ -1,25 +1,61 @@
+const DIR = __dirname;
 const dotenv = require('dotenv');
 dotenv.config();
 
 let config = {
-  firebase: {
-    credentialsPath: process.env.FIREBASE_CREDENTIAL_PATH, //path in app folder
-    defaultCollection: '',
-    defaultArticle: '',
-    defaultArticleId: '',
-
+  dev: {
+    firebase: {
+      credentialsPath: DIR + '/../.credentials/' + (process.env.FIREBASE_CREDENTIAL_PATH||'some.json'),
+      defaultCollection: (process.env.FIREBASE_DEFAULT_COLLECTION||'someCollection'),
+      defaultArticle: (process.env.FIREBASE_DEFAULT_ARTICLE||'Неопределено'),
+      defaultArticleId: (process.env.FIREBASE_DEFAULT_ARTICLE_ID||'notdefined'),
+      url: (process.env.FIREBASE_URL||'https://yourinstance.firebaseio.com')
+    },
+    google: {
+      tokenPath: DIR + '/../.credentials/' + (process.env.GOOGLE_TOKEN_PATH||'sometoken.json'),
+      credentialsPath: DIR + '/../.credentials/' + (process.env.GOOGLE_CREDENTIAL_PATH||'somecreds.json'),
+      spreadsheetId: (process.env.GOOGLE_SPREADSHEET_ID||'yourspreadsheetid'),
+      range: (process.env.GOOGLE_RANGE||'SheetName!A2:F')
+    },
+    imap:{
+      username: process.env.IMAP_USER,
+      password: process.env.IMAP_PASSWORD,
+      host: process.env.IMAP_HOST,
+      port: process.env.IMAP_PORT,
+      mailbox: process.env.IMAP_MAILBOX
+    },
+    debug: (process.env.DEBUG||1),
+    testTimeout: (process.env.TEST_TIMEOUT||3000),
+    hardResetTimeout: (process.env.HARD_RESET_TIMEOUT||10000),
+    stage: 'dev'
   },
-  google: {
-    tokenPath: process.env.GOOGLE_TOKEN_PATH || '.credentials/..',
-    credentialsPath: process.env.GOOGLE_CREDENTIAL_PATH || '.credentials/..',
-    spreadsheetId: process.env.GOOGLE_SPREADSHEET_ID || '',
-    range: process.env.GOOGLE_RANGE || ''
-  },
 
-  debug: process.env.DEBUG || 1,
-  testTimeout: process.env.TEST_TIMEOUT || 3000,
-  hardResetTimeout: process.env.HARD_RESET_TIMEOUT || 30000
-
+  prod: {
+    firebase: {
+      credentialsPath: DIR + '/../.credentials/' + (process.env.FIREBASE_CREDENTIAL_PATH||'some.json'),
+      defaultCollection: (process.env.FIREBASE_DEFAULT_COLLECTION||'someCollection'),
+      defaultArticle: (process.env.FIREBASE_DEFAULT_ARTICLE||'Неопределено'),
+      defaultArticleId: (process.env.FIREBASE_DEFAULT_ARTICLE_ID||'notdefined'),
+      url: (process.env.FIREBASE_URL||'https://yourinstance.firebaseio.com')
+    },
+    google: {
+      tokenPath: DIR + '/../.credentials/' + (process.env.GOOGLE_TOKEN_PATH||'sometoken.json'),
+      credentialsPath: DIR + '/../.credentials/' + (process.env.GOOGLE_CREDENTIAL_PATH||'somecreds.json'),
+      spreadsheetId: (process.env.GOOGLE_SPREADSHEET_ID||'yourspreadsheetid'),
+      range: (process.env.GOOGLE_RANGE||'SheetName!A2:F')
+    },
+    imap:{
+      username: process.env.IMAP_USER,
+      password: process.env.IMAP_PASSWORD,
+      host: process.env.IMAP_HOST,
+      port: process.env.IMAP_PORT,
+      mailbox: process.env.IMAP_MAILBOX
+    },
+    debug: (process.env.DEBUG||1),
+    testTimeout: (process.env.TEST_TIMEOUT||3000),
+    hardResetTimeout: (process.env.HARD_RESET_TIMEOUT||10000),
+    stage: 'prod'
+  }
 }
 
 

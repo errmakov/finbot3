@@ -1,14 +1,10 @@
-/*
-  TODO:
-    PUT method
-
-*/
+const DIR = __dirname;
 const mocha = require('mocha');
 const chai = require('chai');
 const sinon = require('sinon');
 //chai.use(require("chai-events"));
 chai.use(require("chai-as-promised"));
-const config = require('../app/config').config;
+const config = require(DIR + '/../app/config').config[process.env.NODE_ENV||'dev'];
 const assert = chai.assert;
 const consoller = require('../vendors/consoller').consoller;
 const EmailToSheet = require('../app/EmailToSheet');
@@ -27,6 +23,8 @@ const optionsImap = {
     debug:null
 };
 
+
+
 const optionsGoogle = {
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   tokenPath: config.google.tokenPath,
@@ -37,7 +35,7 @@ const optionsGoogle = {
 
 
 const db = require('../app/Db');
-const dbConf = {serviceKey:require('../' + config.firebase.credentialsPath)}
+const dbConf = {serviceKey:require(config.firebase.credentialsPath)}
 let dbh;
 db.initDb(dbConf,(err, res)=>{
   dbh = res;

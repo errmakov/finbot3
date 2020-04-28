@@ -1,4 +1,5 @@
-const config = require('../app/config').config;
+const DIR = __dirname;
+const config = require(DIR + '/../app/config').config[process.env.NODE_ENV||'dev'];
 const consoller = require('../vendors/consoller').consoller;
 const mocha = require('mocha');
 const chai = require('chai');
@@ -45,9 +46,12 @@ const emailSet = Array (
    });
  }
 
- const db = require('../app/Db');
- const dbConf = {serviceKey:require('../' + config.firebase.credentialsPath)}
- let dbh;
+ const db = require(DIR + '/../app/Db');
+ const dbConf = {
+   serviceKey: require(config.firebase.credentialsPath),
+   url: config.firebase.url
+ }
+ let dbh, ets;
  db.initDb(dbConf,(err, res)=>{
    dbh = res;
  })
@@ -100,6 +104,7 @@ describe('testDataParser()', () => {
 
 
   it("Test dataParser.getArticle fulFilled while called with any not undefined arg", function() {
+        console.log('conf: ', config.firebase.defaultArticle);
         return assert.becomes(parser.getArticle('foo bar', dbh), config.firebase.defaultArticle);
   });
 

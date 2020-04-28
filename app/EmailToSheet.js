@@ -2,7 +2,7 @@ const DIR = __dirname;
 const consoller = require(DIR + '/../vendors/consoller').consoller;
 const dataParser = require(DIR + '/dataParser').dataParser;
 const DataSender = require(DIR + '/DataSender');
-const config = require(DIR + '/config').config;
+const config = require(DIR + '/../app/config').config[process.env.NODE_ENV||'dev'];
 
 MailListener = require("mail-listener5");
 

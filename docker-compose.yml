@@ -2,6 +2,17 @@ version: "3"
 services:
   finbot3:
     build: .
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - IMAP_USER=${IMAP_USER}
+      - IMAP_PASSWORD=${IMAP_PASSWORD}
+      - IMAP_HOST=${IMAP_HOST}
+      - IMAP_PORT=${IMAP_PORT}
+      - IMAP_MAILBOX=${IMAP_MAILBOX}
+      - HARD_RESET_TIMEOUT=${HARD_RESET_TIMEOUT}
+      - DEBUG=${DEBUG}
     restart: "unless-stopped"
     hostname: "docker_finbot3"
     container_name: "finbot3"

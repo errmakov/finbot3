@@ -13,7 +13,7 @@ function initDb(dbConf, callback) {
   try {
     fbAdmin.initializeApp({
       credential: fbAdmin.credential.cert(dbConf.serviceKey),
-      databaseURL: "https://finbot2.firebaseio.com"
+      databaseURL: dbConf.url
     });
     fbStore = fbAdmin.firestore();
   }

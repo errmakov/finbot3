@@ -1,9 +1,10 @@
+const DIR = __dirname;
 const fs = require('fs');
 const mocha = require('mocha');
 const chai = require('chai');
 const sinon = require('sinon');
 chai.use(require("chai-as-promised"));
-const config = require('../app/config').config;
+const config = require(DIR + '/../app/config').config[process.env.NODE_ENV||'dev'];
 const consoller = require('../vendors/consoller').consoller;
 
 const assert = chai.assert;
@@ -26,26 +27,26 @@ describe('testGooglePost()', () => {
   })
 
 
-  it("Test DataPoster.put with valid creds returns 200 OK", function() {
+  it("Test DataSender.put with valid creds returns 200 OK", function() {
     let rows = [['foo foo','bar']];
     let sender = new DataSender(optionsGoogle);
     args = [rows, optionsGoogle.spreadsheetId, optionsGoogle.range];
     return assert.becomes(sender.put(args),200)
   })
 
-  it("Test DataPoster.createOAuth reject: invalid creds, valid token", function() {
+  it("Test DataSender.createOAuth reject: invalid creds, valid token", function() {
     let sender = new DataSender(optionsGoogle);
     return assert.isRejected(sender.createOAuth('foo', optionsGoogle), 'OAuth error')
   })
 
-  it("Test DataPoster.createOAuth reject: valid creds, invalid token", function() {
+  it("Test DataSender.createOAuth reject: valid creds, invalid token", function() {
     let sender = new DataSender(optionsGoogle);
     let creds = fs.readFileSync(optionsGoogle.credentialsPath);
     creds = JSON.parse(creds);
     return assert.isRejected(sender.createOAuth(creds, 'foo'), 'Token error')
   })
 
-  it("Test DataPoster.createOAuth resolved with valid args", function() {
+  it("Test DataSender.createOAuth resolved with valid args", function() {
     let sender = new DataSender(optionsGoogle);
     let creds = fs.readFileSync(optionsGoogle.credentialsPath);
     creds = JSON.parse(creds);
