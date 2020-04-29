@@ -50,7 +50,7 @@ let dataParser = {
     let body, regResult;
 
     if ((mail.html === undefined) || (mail.html === false)) {
-      mail.text = mail.text.replace(/\r?\n|\r/g, '');
+      mail.text = mail.text.replace(/\r?\n|\r/g, ' ');
       regResult = mail.text.match(/(Покупка|перевод) (.*)р/gi); // Sber
       return regResult[0];
     } else {
