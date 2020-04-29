@@ -1,3 +1,8 @@
+/*
+  TODO:
+  Удалить лишнее в смс http://joxi.ru/V2VaoPQSdDb1pm
+
+*/
 const DIR = __dirname;
 const mocha = require('mocha');
 const chai = require('chai');

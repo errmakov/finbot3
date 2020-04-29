@@ -90,7 +90,7 @@ describe('testDataParser()', () => {
 
   for (let i in emailSet) {
     it("Test dataParser.getAccount is valid", function() {
-        assert.isNotNull(parser.getAccount(parser.getEmailBody(emailSet[i])).match(/^(Сбер|Точка)/));
+        assert.isNotNull(parser.getAccount(emailSet[i]).match(/^(Сбер|Точка)/));
     })
   }
 

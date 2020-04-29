@@ -74,7 +74,7 @@ class EmailToSheet extends MailListener.MailListener {
             this.parser.getAmountFromEmailBody(eb),
             eb,
             article,
-            this.parser.getAccount(eb),
+            this.parser.getAccount(mail),
             this.parser.convertDate(new Date, true),
             mail.from.text
           ]];
