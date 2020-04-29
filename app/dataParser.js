@@ -46,11 +46,15 @@ let dataParser = {
     // let m = mail.html.replace(/"/g,'\\\\"');
     // m = m.replace(/\r/g,'');
     // m = m.replace(/\n/g,'');
-    let body;
+
+    let body, regResult;
+
     if ((mail.html === undefined) || (mail.html === false)) {
-      return mail.text.trim();
+      mail.text = mail.text.replace(/\r?\n|\r/g, '');
+      regResult = mail.text.match(/(Покупка|перевод) (.*)р/gi); // Sber
+      return regResult[0];
     } else {
-      let regResult = new RegExp(/Покупка: (.*)[RUB|EUR|USD](.*)[RUB|EUR|USD]/).exec(mail.html); //Tochka rub
+      regResult = new RegExp(/Покупка: (.*)[RUB|EUR|USD](.*)[RUB|EUR|USD]/).exec(mail.html); //Tochka rub
       return regResult[0];
     }
   },
@@ -76,11 +80,17 @@ let dataParser = {
 
   /**
    * По ряду признаков в теле письма пытаемся идентифицировать к какому счету отнести трату
-   * @param {string} txt - Тело письма
+   * @param {string} mail - Объект mail
    * @return {string} - Название счета
    */
-  getAccount(txt) {
+  getAccount(mail) {
+    let txt;
     //console.log(txt);
+    if ((mail.html === undefined) || (mail.html === false)) {
+      txt = mail.text;
+    } else {
+      txt = mail.html;
+    }
     if (txt.match(/Карта \*5015/g)) return 'Точка'
     if (txt.match(/Sber 900/g)) return 'Сбер'
   },
