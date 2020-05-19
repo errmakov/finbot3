@@ -1,6 +1,9 @@
 const DIR = __dirname;
 const config = require(DIR + '/../app/config').config[process.env.NODE_ENV||'dev'];
 
+/**
+ * Модуль парсинга данных
+ */
 let dataParser = {
 
 
@@ -28,9 +31,9 @@ let dataParser = {
   },
 
   /**
-   * Возвращаем номер месяца для переданной даты
-   * @param {object} date - Date обьект
-   * @return {number} - номер месяца в диапазоне 1..12.
+   * Возвращаем номер месяца для переданной даты в диапазоне 1..12
+   * @param {object} date - Объект Date
+   * @return {number} - Номер месяца в диапазоне 1..12.
    */
   getMonth(date) {
     if (typeof(date) != 'object') return false;
@@ -38,9 +41,9 @@ let dataParser = {
   },
 
   /**
-   * Извлекаем из объекта Mail тело письма
+   * Извлекаем тело письма из объекта Mail
    * @param {object} mail - Объект Письмо
-   * @return {string} - тело письма (plain или html).
+   * @return {string} - Тело письма
    */
   getEmailBody(mail) {
     // let m = mail.html.replace(/"/g,'\\\\"');
@@ -48,22 +51,32 @@ let dataParser = {
     // m = m.replace(/\n/g,'');
 
     let body, regResult;
-
     if ((mail.html === undefined) || (mail.html === false)) {
-      mail.text = mail.text.replace(/\r?\n|\r/g, ' ');
-      regResult = mail.text.match(/(Покупка|перевод) (.*)р/gi); // Sber
+      body = mail.text;
+    } else {
+      body = mail.html;
+    }
+
+    body = body.replace(/\r?\n|\r/g, ' ');
+    regResult = body.match(/(Покупка|перевод) (.*)р/gi); // Sber
+
+    if (regResult) {
       return regResult[0];
     } else {
-      regResult = new RegExp(/Покупка: (.*)[RUB|EUR|USD](.*)[RUB|EUR|USD]/).exec(mail.html); //Tochka rub
-      return regResult[0];
+      regResult = new RegExp(/Покупка: (.*)[RUB|EUR|USD](.*)[RUB|EUR|USD]/).exec(body); //Tochka rub
+      if (regResult) {
+        return regResult[0];
+      } else {
+        // nothing yet
+      }
     }
   },
 
 
   /**
-   * Извлекаем округленную до рублей сумму (покупки) из тела письма
+   * Извлекаем округленную до целого  сумму (покупки) из тела письма
    * @param {string} mailBody - Тело письма
-   * @return {number} - Сумма
+   * @return {number} - Сумма. Например: 145
    */
    getAmountFromEmailBody(mailBody){
        let regResult = mailBody.match(/Покупка ([^р]+)р/); // Sber rub
@@ -79,9 +92,10 @@ let dataParser = {
   },
 
   /**
-   * По ряду признаков в теле письма пытаемся идентифицировать к какому счету отнести трату
+   * Возвращает счет, к которому относится трата.
+   * По ряду признаков функция определяет к какому счету относится трата.
    * @param {string} mail - Объект mail
-   * @return {string} - Название счета
+   * @return {string} - Название счета. Например: 'Точка', 'Сбер'
    */
   getAccount(mail) {
     let txt;

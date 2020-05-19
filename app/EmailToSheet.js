@@ -57,7 +57,6 @@ class EmailToSheet extends MailListener.MailListener {
         reject(new Error('Invalid email'))
       }
       let eb = this.parser.getEmailBody(mail);
-
       this.parser.getArticle(eb, this._dbh)
         .then((article)=>{
           return new Promise((resolve,reject)=>{resolve(article)});
