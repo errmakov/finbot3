@@ -63,7 +63,7 @@ let dataParser = {
     if (regResult) {
       return regResult[0];
     } else {
-      regResult = new RegExp(/Покупка: (.*)[RUB|EUR|USD](.*)[RUB|EUR|USD]/).exec(body); //Tochka rub
+      regResult = new RegExp(/Покупка: (.*?)[RUB|EUR|USD]{3}(.*?) Остаток(.*?)[RUB|EUR|USD]{3}/gm).exec(body); //Tochka rub
       if (regResult) {
         return regResult[0];
       } else {
