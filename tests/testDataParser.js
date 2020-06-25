@@ -26,7 +26,9 @@ const smsSet = {
   3:['Покупка: 1 000 RUB в BEELINE MOB. Карта *5015. Остаток 29 913.34 RUB', 1000, 'Связь', 'BEELINE MOB'],
   4:['Покупка: 599 RUB в GOOGLE*GOOG. Карта *5015. Остаток 144 424.52 RUB', 599, 'Работа', 'GOOGLE*GOOG'],
   5:['Покупка: 11 324.71 RUB в 2CO.com*cre. Карта *5015. Остаток 198 713.73 RUB', 11325, 'Работа', '2CO.com*cre'],
-  6:['Sber 900 <900>: ECMC1730 10:27 перевод 41000р Баланс: 10418.99р', 41000, 'Неопределено', null]
+  6:['Sber 900 <900>: ECMC1730 10:27 перевод 41000р Баланс: 10418.99р', 41000, 'Неопределено', false],
+  7:['Входящее - Alfa-Bank (Контакт не определен) Текст сообщения: **1317 Pokupka Uspeshno Summa: 998,23 RUR Ostatok: 33 616,82 RUR RU/MOSCOW/PEREKRESTOK YUGO-ZAP. 24.06.2020 17:37:22 (24.06.2020 17:43)', 998, 'Неопределено', 'PEREKRESTOK YUGO-ZAP'],
+  8:['Входящее - Alfa-Bank (Контакт не определен) Текст сообщения: **1317 Pokupka Uspeshno Summa: 1 998,23 RUR Ostatok: 33 616,82 RUR RU/MOSCOW/PEREKRESTOK YUGO-ZAP. 24.06.2020 17:37:22 (24.06.2020 17:43)', 1998, 'Неопределено', 'PEREKRESTOK YUGO-ZAP']
 };
 
 /* TODO: Вынести подготовку этого массива в отдельный модуль */
@@ -62,7 +64,7 @@ describe('testDataParser()', () => {
 
 
   for (let i in smsSet) {
-    it("Test dataParser.getPOS returns valid POS (name of POS or false)", function() {
+    it("Test dataParser.getPOS returns valid POS (name of POS or false): " + i, function() {
           return assert.deepEqual(parser.getPOS(smsSet[i][0]),smsSet[i][3]);
     });
   }

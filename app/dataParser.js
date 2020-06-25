@@ -82,6 +82,7 @@ let dataParser = {
        let regResult = mailBody.match(/Покупка ([^р]+)р/); // Sber rub
        if (!regResult) regResult =  mailBody.match(/перевод ([^р]+)р/); //Sber transfer
        if (!regResult) regResult =  mailBody.match(/Покупка: ([^R]+)R/); //Tochka rub
+       if (!regResult) regResult =  mailBody.match(/Pokupka Uspeshno Summa: ([^R]+)R/); //Alfa rub
        if (!regResult) {
          console.log('Something wrong: ', mailBody);
          return 0;
@@ -115,11 +116,24 @@ let dataParser = {
    * @return {string} - Название точки продаж или null
    */
   getPOS(txt) {
-    let pos = txt.match(/\dр\s(.*)\sБаланс/);
-    if (!pos) {
-      pos = txt.match(/в\s(.*)\.\sКарта/);
+    let result = '';
+    let pos = txt.match(/\dр\s(.*)\sБаланс/); //сбер
+    result = (pos) ? pos[1] : false;
+
+    if (!result) {
+      pos = txt.match(/в\s(.*)\.\sКарта/); //точка
+      result = (pos) ? pos[1] : false;
     }
-    return pos ? pos[1] : pos;
+    if (!result) {
+      pos = txt.match(/Ostatok(.*)RUR\s(.*).\s\d{2}.\d{2}.\d{4}/); //точка
+      //console.log(pos);
+      result = (pos) ? pos[2] : false;
+      if (result) {
+        pos = result.match(/(.*)\/(.*)/);
+        result = (pos) ? pos[2] : false;
+      }
+    }
+    return result;
   },
 
   /**
