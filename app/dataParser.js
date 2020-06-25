@@ -125,7 +125,7 @@ let dataParser = {
       result = (pos) ? pos[1] : false;
     }
     if (!result) {
-      pos = txt.match(/Ostatok(.*)RUR\s(.*).\s\d{2}.\d{2}.\d{4}/); //точка
+      pos = txt.match(/Ostatok(.*)RUR\s(.*)\s\d{2}.\d{2}.\d{4}/); //точка
       //console.log(pos);
       result = (pos) ? pos[2] : false;
       if (result) {

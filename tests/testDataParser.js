@@ -27,9 +27,11 @@ const smsSet = {
   4:['Покупка: 599 RUB в GOOGLE*GOOG. Карта *5015. Остаток 144 424.52 RUB', 599, 'Работа', 'GOOGLE*GOOG'],
   5:['Покупка: 11 324.71 RUB в 2CO.com*cre. Карта *5015. Остаток 198 713.73 RUB', 11325, 'Работа', '2CO.com*cre'],
   6:['Sber 900 <900>: ECMC1730 10:27 перевод 41000р Баланс: 10418.99р', 41000, 'Неопределено', false],
-  7:['Входящее - Alfa-Bank (Контакт не определен) Текст сообщения: **1317 Pokupka Uspeshno Summa: 998,23 RUR Ostatok: 33 616,82 RUR RU/MOSCOW/PEREKRESTOK YUGO-ZAP. 24.06.2020 17:37:22 (24.06.2020 17:43)', 998, 'Неопределено', 'PEREKRESTOK YUGO-ZAP'],
-  8:['Входящее - Alfa-Bank (Контакт не определен) Текст сообщения: **1317 Pokupka Uspeshno Summa: 1 998,23 RUR Ostatok: 33 616,82 RUR RU/MOSCOW/PEREKRESTOK YUGO-ZAP. 24.06.2020 17:37:22 (24.06.2020 17:43)', 1998, 'Неопределено', 'PEREKRESTOK YUGO-ZAP']
+  7:['Входящее - Alfa-Bank (Контакт не определен) Текст сообщения: **1317 Pokupka Uspeshno Summa: 998,23 RUR Ostatok: 33 616,82 RUR RU/MOSCOW/PEREKRESTOK YUGO-ZAP. 24.06.2020 17:37:22 (24.06.2020 17:43)', 998, 'Неопределено', 'PEREKRESTOK YUGO-ZAP.'],
+  8:['Входящее - Alfa-Bank (Контакт не определен) Текст сообщения: **1317 Pokupka Uspeshno Summa: 1 998,23 RUR Ostatok: 33 616,82 RUR RU/MOSCOW/PEREKRESTOK YUGO-ZAP. 24.06.2020 17:37:22 (24.06.2020 17:43)', 1998, 'Неопределено', 'PEREKRESTOK YUGO-ZAP.'],
+  9:['Входящее - Alfa-Bank (Контакт не определен) Текст сообщения: **1317 Pokupka Uspeshno Summa: 180 RUR Ostatok: 34 669,05 RUR RU/MOSCOW/DEZHURNAYA RYUMOCHNAYA 24.06.2020 16:16:22 (24.06.2020 16:28)', 180, 'Неопределено', 'DEZHURNAYA RYUMOCHNAYA']
 };
+
 
 /* TODO: Вынести подготовку этого массива в отдельный модуль */
 const emailSet = Array (
