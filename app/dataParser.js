@@ -67,7 +67,12 @@ let dataParser = {
       if (regResult) {
         return regResult[0];
       } else {
-        // nothing yet
+        regResult = new RegExp(/Pokupka Uspeshno Summa: (.*?)[RUR|EUR|USD]{3}(.*?) Ostatok(.*?)[RUB|EUR|USD]{3}(.*)\s\d{2}.\d{2}.\d{4}/gm).exec(body); //Alfabank
+        if (regResult) {
+          return regResult[0]
+        } else {
+          return 'foobar';
+        }
       }
     }
   },
@@ -108,6 +113,7 @@ let dataParser = {
     }
     if (txt.match(/Карта \*5015/g)) return 'Точка'
     if (txt.match(/Sber 900/g)) return 'Сбер'
+    if (txt.match(/Alfa-Bank/g)) return 'Альфа'
   },
 
   /**
