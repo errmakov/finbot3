@@ -11,7 +11,7 @@
     "test": "mocha --recursive ./tests --timeout 5000",
     "test1": "mocha ./tests/testEmailToSheet --timeout 3000",
     "test2": "mocha ./tests/testDataParser --timeout 3000",
-    "test3": "mocha ./tests/testDataSender --timeout 3000",
+    "testDataSender": "mocha ./tests/testDataSender --timeout 3000",
     "testcov": "nyc mocha --recursive ./tests --timeout 5000"
   },
   "author": "Denis Ermakov",

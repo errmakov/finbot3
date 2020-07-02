@@ -13,6 +13,23 @@ const DataSender = require('../app/DataSender');
 
 let optionsGoogle;
 
+let testRowSet = {
+  0: [['foo foo 01 ','bar 01']],
+  1: [['foo foo 02 ','bar 02']],
+  2: [['foo foo 03 ','bar 03']],
+  3: [['foo foo 04 ','bar 04']],
+  4: [['foo foo 05 ','bar 05']],
+  5: [['foo foo 06 ','bar 06']],
+  6: [['foo foo 07 ','bar 07']],
+  7: [['foo foo 08 ','bar 08']],
+  8: [['foo foo 09 ','bar 09']],
+  9: [['foo foo 10 ','bar 10']],
+  10: [['foo foo 11 ','bar 11']]
+
+}
+
+
+
 describe('testGooglePost()', () => {
 
   beforeEach(()=>{
@@ -26,13 +43,17 @@ describe('testGooglePost()', () => {
 
   })
 
+  for (i in testRowSet) {
 
-  it("Test DataSender.put with valid creds returns 200 OK", function() {
-    let rows = [['foo foo','bar']];
-    let sender = new DataSender(optionsGoogle);
-    args = [rows, optionsGoogle.spreadsheetId, optionsGoogle.range];
-    return assert.becomes(sender.put(args),200)
-  })
+    let rows = testRowSet[i];
+    console.log('i: ', testRowSet[i]);
+    it("Test DataSender.put with valid creds returns 200 OK: " + rows, function() {
+      let sender = new DataSender(optionsGoogle);
+      args = [rows, optionsGoogle.spreadsheetId, optionsGoogle.range];
+      return assert.becomes(sender.put(args),200)
+    })
+  }
+
 
   it("Test DataSender.createOAuth reject: invalid creds, valid token", function() {
     let sender = new DataSender(optionsGoogle);

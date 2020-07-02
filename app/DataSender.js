@@ -24,6 +24,7 @@ class DataSender {
           if (err) {
             reject(err);
           } else {
+            console.log(response);
             resolve(response.status);
           }
         })
