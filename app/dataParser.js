@@ -67,7 +67,7 @@ let dataParser = {
       if (regResult) {
         return regResult[0];
       } else {
-        regResult = new RegExp(/Pokupka Uspeshno Summa: (.*?)[RUR|EUR|USD]{3}(.*?) Ostatok(.*?)[RUB|EUR|USD]{3}(.*)\s\d{2}.\d{2}.\d{4}/gm).exec(body); //Alfabank
+        regResult = new RegExp(/Pokupka Summa: (.*?)[RUR|EUR|USD]{3}(.*?) Ostatok(.*?)[RUB|EUR|USD]{3}(.*)\s\d{2}.\d{2}.\d{4}/gm).exec(body); //Alfabank
         if (regResult) {
           return regResult[0]
         } else {
