@@ -87,7 +87,7 @@ let dataParser = {
        let regResult = mailBody.match(/Покупка ([^р]+)р/); // Sber rub
        if (!regResult) regResult =  mailBody.match(/перевод ([^р]+)р/); //Sber transfer
        if (!regResult) regResult =  mailBody.match(/Покупка: ([^R]+)R/); //Tochka rub
-       if (!regResult) regResult =  mailBody.match(/Pokupka Uspeshno Summa: ([^R]+)R/); //Alfa rub
+       if (!regResult) regResult =  mailBody.match(/Pokupka Summa: ([^R]+)R/); //Alfa rub
        if (!regResult) {
          console.log('Something wrong: ', mailBody);
          return 0;
