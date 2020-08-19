@@ -67,7 +67,7 @@ let dataParser = {
       if (regResult) {
         return regResult[0];
       } else {
-        regResult = new RegExp(/Pokupka Summa: (.*?)[RUR|EUR|USD]{3}(.*?) Ostatok(.*?)[RUB|EUR|USD]{3}(.*)\s\d{2}.\d{2}.\d{4}/gm).exec(body); //Alfabank
+        regResult = new RegExp(/(Pokupka|Pokupka Uspeshno) Summa: (.*?)[RUR|EUR|USD]{3}(.*?) Ostatok(.*?)[RUB|EUR|USD]{3}(.*)\s\d{2}.\d{2}.\d{4}/gm).exec(body); //Alfabank
         if (regResult) {
           return regResult[0]
         } else {
@@ -88,6 +88,7 @@ let dataParser = {
        if (!regResult) regResult =  mailBody.match(/перевод ([^р]+)р/); //Sber transfer
        if (!regResult) regResult =  mailBody.match(/Покупка: ([^R]+)R/); //Tochka rub
        if (!regResult) regResult =  mailBody.match(/Pokupka Summa: ([^R]+)R/); //Alfa rub
+       if (!regResult) regResult =  mailBody.match(/Pokupka Uspeshno Summa: ([^R]+)R/); //Alfa rub
        if (!regResult) {
          console.log('Something wrong: ', mailBody);
          return 0;
